@@ -36,7 +36,7 @@ public class AnagramFinderV1 {
 				// calculation
 				resultList = new ArrayList<String>();
 				long t3 = System.currentTimeMillis();
-				for (int i=0; i<dictList.size(); i++) {
+				for (int i=0; i<dictList.size(); i++) { // compare with every word from dictionary
 					dictWord = dictList.get(i);
 					if(isAnagram(word.toLowerCase(), dictWord.toLowerCase())) {
 						resultList.add(dictWord);
@@ -65,10 +65,13 @@ public class AnagramFinderV1 {
 		}
 	}
 
+	/**
+	 * method to check whether two words are angram or not
+	 */
 	private static Boolean isAnagram(String word, String dictWord) {
 		int wordLen = word.length();
 		int dictWordLen = dictWord.length();
-		if(wordLen!=dictWordLen) {
+		if(wordLen!=dictWordLen) { // word length should be the same
 			return false;
 		}
 		int[] countArr = new int[26];
@@ -82,7 +85,7 @@ public class AnagramFinderV1 {
 		}
 		int sum = 0;
 		for(int c:countArr) {
-			if(c!=0) {
+			if(c!=0) { // after looping 2 words, letter char count should be 0
 				return false;
 			}
 		}
