@@ -1,24 +1,29 @@
-import java.util.*;
-import java.lang.*;
-import java.io.*;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
- * Anagram Finder - version 1
+ * Anagram Finder Advanced - version 2
  * 
  */
-public class AnagramFinderV1 {
-	// command: java javaFile textFile.txt
+public class AnagramFinderAdvanced {
+	// command: java AnagramFinderAdvanced dictionary.txt
 	public static void main(String[] args) {
 		String fileName = args[0];
-		List<String> dictList = new ArrayList<String>();
+		Map returnMap = new HashMap<Integer, List>();
 		List resultList = new ArrayList<String>();
 		String dictWord = null;
-		dictList = fetchDictionaryAsList(fileName);
+		returnMap = loadDictionaryAsMap(fileName);
 		while(true) {
 			// message
 			System.out.println("please enter a word or exit:");
 			// read string from command line
-			String word = System.console().readLine();
+			String word = System.console().readLine().trim();
 			if("exit".equalsIgnoreCase(word)) {
 				System.out.println("exit!");
 				System.exit(0);
@@ -27,11 +32,14 @@ public class AnagramFinderV1 {
 			// calculation
 			resultList = new ArrayList<String>();
 			long t3 = System.currentTimeMillis();
-			for (int i=0; i<dictList.size(); i++) { // compare with every word from dictionary
-				dictWord = dictList.get(i);
-				if(isAnagram(word.toLowerCase(), dictWord.toLowerCase())) {
-					resultList.add(dictWord);
-				}
+			List<String> dictList = (List) returnMap.get(word.length());
+			if(dictList!=null && !dictList.isEmpty()) {
+				for (int i=0; i<dictList.size(); i++) { // compare with every word from dictionary
+					dictWord = dictList.get(i);
+					if(isAnagram(word.toLowerCase(), dictWord.toLowerCase())) {
+						resultList.add(dictWord);
+					}
+				}				
 			}
 			long t4 = System.currentTimeMillis();
 			// output result
@@ -48,16 +56,26 @@ public class AnagramFinderV1 {
 	/**
 	 * load dictionary as a ArrayList
 	 */
-	private static List fetchDictionaryAsList(String fileName) {
-		List returnList = new ArrayList<String>();
+	public static Map loadDictionaryAsMap(String fileName) {
+		Map returnMap = new HashMap<Integer, List>();
 		BufferedReader br = null;
 		String dictWord = null;
+		Integer dictWordLen = null;
+		List wordList = new ArrayList<String>(); // word list by word length
 		try {
 			System.out.println("Welcome to the Anagram Finder\n-----------------------------");
 			br = new BufferedReader(new FileReader(fileName));
 			long t1 = System.currentTimeMillis();
 			while ((dictWord = br.readLine()) != null) {
-				returnList.add(dictWord);
+				dictWordLen = dictWord.length();
+				if(returnMap.containsKey(dictWordLen)) {
+					wordList = (List) returnMap.get(dictWordLen);
+				}
+				else {
+					wordList = new ArrayList<String>();
+				}
+				wordList.add(dictWord);
+				returnMap.put(dictWordLen, wordList);
 			}
 			long t2 = System.currentTimeMillis();
 			System.out.println("Dictionary loaded in " + (t2-t1) + "ms");
@@ -71,13 +89,13 @@ public class AnagramFinderV1 {
 				System.out.println("Error in closing the BufferedReader");
 			}
 		}
-		return returnList;
+		return returnMap;
 	}
-
+	
 	/**
 	 * method to check whether two words are angram or not
 	 */
-	private static Boolean isAnagram(String word, String dictWord) {
+	public static Boolean isAnagram(String word, String dictWord) {
 		int wordLen = word.length();
 		int dictWordLen = dictWord.length();
 		if(wordLen!=dictWordLen) { // word length should be the same
@@ -92,7 +110,6 @@ public class AnagramFinderV1 {
 			countArr[wordChar-'a']++;
 			countArr[dictWordChar-'a']--;
 		}
-		int sum = 0;
 		for(int c:countArr) {
 			if(c!=0) { // after looping 2 words, letter char count should be 0
 				return false;
@@ -100,5 +117,6 @@ public class AnagramFinderV1 {
 		}
 		return true;
 	}
+
 
 }
