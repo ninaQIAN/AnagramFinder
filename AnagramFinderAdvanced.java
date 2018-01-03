@@ -23,7 +23,12 @@ public class AnagramFinderAdvanced {
 			// message
 			System.out.println("please enter a word or exit:");
 			// read string from command line
-			String word = System.console().readLine().trim();
+			String word = System.console().readLine().trim().toLowerCase(); // clean up
+			if(!word.matches("[a-z]+")) { // word validation
+				System.out.println("ERROR: Input word should contain alphabets only.\n");
+				continue;
+			}
+			// exit command
 			if("exit".equalsIgnoreCase(word)) {
 				System.out.println("exit!");
 				System.exit(0);
