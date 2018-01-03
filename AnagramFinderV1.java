@@ -27,7 +27,7 @@ public class AnagramFinderV1 {
 				// message
 				System.out.println("please enter a word or exit:");
 				// read string from command line
-				String word = System.console().readLine();
+				String word = System.console().readLine().trim().toLowerCase();
 				if("exit".equalsIgnoreCase(word)) {
 					System.out.println("exit!");
 					System.exit(0);
@@ -38,7 +38,7 @@ public class AnagramFinderV1 {
 				long t3 = System.currentTimeMillis();
 				for (int i=0; i<dictList.size(); i++) { // compare with every word from dictionary
 					dictWord = dictList.get(i);
-					if(isAnagram(word.toLowerCase(), dictWord.toLowerCase())) {
+					if(isAnagram(word, dictWord.toLowerCase())) {
 						resultList.add(dictWord);
 					}
 				}
