@@ -1,6 +1,7 @@
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,6 +15,10 @@ import java.util.Map;
 public class AnagramFinderAdvanced {
 	// command: java AnagramFinderAdvanced dictionary.txt
 	public static void main(String[] args) {
+		if(args.length==0) {
+			System.out.println("ERROR: No dictionary found!\n");
+			System.exit(0);
+		}
 		String fileName = args[0];
 		Map returnMap = new HashMap<Integer, List>();
 		List resultList = new ArrayList<String>();
@@ -21,11 +26,11 @@ public class AnagramFinderAdvanced {
 		returnMap = loadDictionaryAsMap(fileName);
 		while(true) {
 			// message
-			System.out.println("please enter a word or exit:");
+			System.out.println("Please enter a word or exit:");
 			// read string from command line
 			String word = System.console().readLine().trim().toLowerCase(); // clean up
 			if(!word.matches("[a-z]+")) { // word validation
-				System.out.println("ERROR: Input word should contain alphabets only.\n");
+				System.out.println("ERROR: Input word should contain alphabets only!\n");
 				continue;
 			}
 			// exit command
@@ -69,6 +74,11 @@ public class AnagramFinderAdvanced {
 		List wordList = new ArrayList<String>(); // word list by word length
 		try {
 			System.out.println("Welcome to the Anagram Finder\n-----------------------------");
+			File f = new File(fileName);
+			if(!f.exists() || f.isDirectory()) { 
+				System.out.println("ERROR: No dictionary found!\n");
+				System.exit(0);
+			}
 			br = new BufferedReader(new FileReader(fileName));
 			long t1 = System.currentTimeMillis();
 			while ((dictWord = br.readLine()) != null) {
@@ -85,13 +95,13 @@ public class AnagramFinderAdvanced {
 			long t2 = System.currentTimeMillis();
 			System.out.println("Dictionary loaded in " + (t2-t1) + "ms");
 		} catch(Exception e) {
-			e.printStackTrace();
+			System.out.println("ERROR: Something happened!");
 		} finally {
 			try {
 				if(br!=null)
 					br.close();
 			} catch (IOException ioe) {
-				System.out.println("Error in closing the BufferedReader");
+				System.out.println("Error: Error in closing the BufferedReader!");
 			}
 		}
 		return returnMap;
