@@ -112,10 +112,6 @@ public class AnagramFinderAdvanced {
 	 */
 	public static Boolean isAnagram(String word, String dictWord) {
 		int wordLen = word.length();
-		int dictWordLen = dictWord.length();
-		if(wordLen!=dictWordLen) { // word length should be the same
-			return false;
-		}
 		int[] countArr = new int[26];
 		char wordChar = 0;
 		char dictWordChar = 0;
