@@ -86,7 +86,7 @@ public class AnagramFinderAdvanced {
 	}
 
 	/**
-	 * load dictionary as a ArrayList
+	 * load dictionary as a HashMap
 	 */
 	public static Map loadDictionaryAsMap(String fileName) {
 		Map returnMap = new HashMap<Integer, List>();
