@@ -1,11 +1,6 @@
-package com.anagramfinder.demo;
+package com.dictionarydemo.api;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -15,13 +10,8 @@ import java.util.Scanner;
  * 
  */
 public class AnagramFinder {
-	// command: java AnagramFinderAdvanced dictionary.txt
-	public static void main(String[] args) {
-		if(args.length==0) {
-			System.out.println("ERROR: No dictionary found!\n");
-			System.exit(1);
-		}
-		String fileName = args[0];
+	
+	/*public static void main(String fileName) {
 		Map dictMap = new HashMap<Integer, List>();
 		List resultList = new ArrayList<String>();
 		long t1 = System.currentTimeMillis();
@@ -62,6 +52,45 @@ public class AnagramFinder {
 				System.out.println("No anagrams found for " + word +" in " + (t4-t3) + "ms\n");
 			}
 		}
+	}*/
+	
+	
+	/**
+	 * Wrapper method to find a word's anagram
+	 * @param dictMap
+	 */
+	public void findAnagram(Map dictMap) {
+		List resultList = new ArrayList<String>();
+		String word = null;
+		Scanner s = new Scanner(System.in);
+		while(true) {
+			// message
+			System.out.println("Please enter a word (enter 0: return to menu):");
+			// read string from command line
+			word = s.next().trim().toLowerCase();
+			// exit command
+			if("0".equalsIgnoreCase(word)) {
+				System.out.println("return!");
+				break;
+			}
+			else {
+				if(!word.matches("[a-z]+")) { // word validation
+					System.out.println("ERROR: Input word should contain alphabets only!\n");
+					continue;
+				}
+				
+				// calculation
+				resultList = fetchAnagram(word, dictMap);
+				// output result
+				if(resultList!=null && resultList.size()>0) { // has anagram
+					System.out.println(resultList.size() + " Anagrams found for " + word + ":\n"
+							+ String.join(",", resultList) + "\n");
+				}
+				else {
+					System.out.println("No anagrams found for " + word +"\n");
+				}
+			}
+		}	
 	}
 	
 	/**
@@ -70,7 +99,7 @@ public class AnagramFinder {
 	 * @param dictMap
 	 * @return
 	 */
-	public static List fetchAnagram(String word, Map<Integer, List> dictMap) {
+	private List fetchAnagram(String word, Map<Integer, List> dictMap) {
 		List returnList = new ArrayList<String>();
 		String dictWord = null;
 		List<String> dictList = (List) dictMap.get(word.length());
@@ -86,9 +115,9 @@ public class AnagramFinder {
 	}
 	
 	/**
-	 * load dictionary as a ArrayList
+	 * load dictionary as a HashMap
 	 */
-	public static Map loadDictionaryAsMap(String fileName) {
+	/*public static Map loadDictionaryAsMap(String fileName) {
 		Map returnMap = new HashMap<Integer, List>();
 		BufferedReader br = null;
 		String dictWord = null;
@@ -125,7 +154,7 @@ public class AnagramFinder {
 			}
 		}
 		return returnMap;
-	}
+	}*/
 	
 	/**
 	 * method to check whether two words are anagram or not
@@ -134,7 +163,7 @@ public class AnagramFinder {
 	 * 2) only lowercase alphabets
 	 * 3) same length
 	 */
-	public static boolean isAnagram(String word, String dictWord) {
+	private boolean isAnagram(String word, String dictWord) {
 		int wordLen = word.length();
 		int[] countArr = new int[26];
 		char wordChar = 0;

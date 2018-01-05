@@ -1,4 +1,4 @@
-package com.anagramfinder.test;
+package com.dictionarydemo.test;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -13,7 +13,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.anagramfinder.demo.AnagramFinder;
+import com.dictionarydemo.api.AnagramFinder;
 
 public class AnagramFinderTest {
 	
