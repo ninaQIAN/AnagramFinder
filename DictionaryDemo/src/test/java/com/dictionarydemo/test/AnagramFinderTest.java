@@ -1,6 +1,5 @@
 package com.dictionarydemo.test;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -19,7 +18,9 @@ import com.dictionarydemo.api.Dictionary;
 
 public class AnagramFinderTest {
 	
-	AnagramFinder anagramFinder = new AnagramFinder();
+	private AnagramFinder anagramFinder = new AnagramFinder();
+	
+	private Dictionary dictionary = new Dictionary();
 	
 	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
@@ -46,15 +47,15 @@ public class AnagramFinderTest {
 	
 	@Test
 	public void testFetchAnagramFromDictionary() {
+		Map sizeMap = dictionary.getSizeMap();
+		assertTrue(sizeMap!=null);
+		assertTrue(!sizeMap.isEmpty());
+
 		String[] testWords = {"spot", "early", "master", "a"};
 		String[] expectWords = {"stop", "relay", "stream", "A"};
-		Dictionary dictionary = new Dictionary();
-		Map dictMap = dictionary.getSizeMap();
-		assertTrue(dictMap!=null);
-		assertTrue(!dictMap.isEmpty());
 		List resultList = new ArrayList<String>();
 		for(int i=0; i<testWords.length; i++) { // test result list
-			resultList = anagramFinder.fetchAnagramFromDictionary(testWords[i], dictMap);
+			resultList = anagramFinder.fetchAnagramFromDictionary(testWords[i], sizeMap);
 			assertTrue(resultList.contains(expectWords[i]));
 			assertFalse(resultList.contains(expectWords[testWords.length-i-1]));
 		}
@@ -62,29 +63,26 @@ public class AnagramFinderTest {
 	
 	@Test
 	public void testFindAnagram() {
-		Dictionary dictionary = new Dictionary();
-		Map dictMap = dictionary.getSizeMap();
-		assertTrue(dictMap!=null);
-		assertTrue(!dictMap.isEmpty());
+		Map sizeMap = dictionary.getSizeMap();
+		assertTrue(sizeMap!=null);
+		assertTrue(!sizeMap.isEmpty());
 		
 		// input edge cases
 		String[] inputEdgeCase = {"a.", "a a", "a.a", ".a"};
 		for(int i=0; i<inputEdgeCase.length; i++) {
-			anagramFinder.findAnagram(inputEdgeCase[i], dictMap);
+			anagramFinder.findAnagram(inputEdgeCase[i], sizeMap);
 			assertTrue(outContent.toString().contains("ERROR: Input word should contain alphabets only!"));
 		}
 
 		// found Anagrams
 		String[] testWords = {"spot", "early", "master", "a", ""};
-		String[] expectWords = {"stop", "relay", "stream", "A"};
-		List resultList = new ArrayList<String>();
 		for(int i=0; i<testWords.length; i++) {
-			anagramFinder.findAnagram(testWords[i], dictMap);
+			anagramFinder.findAnagram(testWords[i], sizeMap);
 			assertTrue(outContent.toString().contains("Anagrams found for " + testWords[i]));
 		}
 		// no Anagram found
 		String noWord = "pl";
-		anagramFinder.findAnagram(noWord, dictMap);
+		anagramFinder.findAnagram(noWord, sizeMap);
 		assertTrue(outContent.toString().contains("No anagrams found for " + noWord));
 	}
 	

@@ -14,6 +14,8 @@ import org.junit.Test;
 import com.dictionarydemo.api.Dictionary;
 
 public class DictionaryTest {
+	
+	private Dictionary dictionary = new Dictionary();
 
 	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
@@ -29,7 +31,6 @@ public class DictionaryTest {
 	
 	@Test
 	public void testGetSizeMap() {
-		Dictionary dictionary = new Dictionary();
 		Map sizeMap = dictionary.getSizeMap();
 		assertTrue(outContent.toString().contains("Loading dictionary by word size"));
 		assertTrue(sizeMap!=null&&!sizeMap.isEmpty());
@@ -41,7 +42,6 @@ public class DictionaryTest {
 
 	@Test
 	public void testGetAlphabetMap() {
-		Dictionary dictionary = new Dictionary();
 		Map alphabetMap = dictionary.getAlphabetMap();
 		assertTrue(outContent.toString().contains("Loading dictionary by initial alphabet"));
 		assertTrue(alphabetMap!=null&&!alphabetMap.isEmpty());

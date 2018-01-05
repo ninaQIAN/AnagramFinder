@@ -42,7 +42,7 @@ public class Search {
 				System.out.println("ERROR: Input word should contain alphabets only!\n");
 			}
 			else if(searchTerm.length()<3) {
-				System.out.println("ERROR: Search term should at least contain 3 characters");
+				System.out.println("ERROR: Search term should at least contain 3 characters!");
 			}
 			else {
 				List resultList = findWordByString(searchTerm, sizeMap);
