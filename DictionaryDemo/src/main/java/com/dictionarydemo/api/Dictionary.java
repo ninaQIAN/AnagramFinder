@@ -114,7 +114,7 @@ public class Dictionary {
 			long t1 = System.currentTimeMillis();
 			br = new BufferedReader(new FileReader(filePath));
 			while ((dictWord = br.readLine()) != null) {
-				dictWordInitial = dictWord.charAt(0);
+				dictWordInitial = Character.toLowerCase(dictWord.charAt(0));
 				if(returnMap.containsKey(dictWordInitial)) {
 					wordList = (List) returnMap.get(dictWordInitial);
 				}

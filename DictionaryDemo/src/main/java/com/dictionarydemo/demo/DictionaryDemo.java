@@ -28,7 +28,7 @@ public class DictionaryDemo {
 			switch(option) {
 			case "1":
 				AnagramFinder anagranFinder = new AnagramFinder();
-				anagranFinder.findAnagram(sizeMap);
+				anagranFinder.findAnagramWrapper(sizeMap);
 				break;
 			case "2":
 				break;
