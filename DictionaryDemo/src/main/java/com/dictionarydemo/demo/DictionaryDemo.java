@@ -36,7 +36,7 @@ public class DictionaryDemo {
 				break;
 			case "0":
 				s.close();
-				System.out.println("exit!");
+				System.out.println("Bye!");
 				exit = true;
 				break;
 			}

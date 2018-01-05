@@ -12,28 +12,36 @@ import com.dictionarydemo.util.Constants;
 
 public class Dictionary {
 	
-	private static final String filePath = Constants.FILEPATH;
+	private String filePath = null;
 	
 	private Map sizeMap = new HashMap<Integer, List>();
 	private Map alphabetMap = new HashMap<Character, List>();
 	
 	public Dictionary() {
-		loadDictionaryAsWordSizeMap();
-		loadDictionaryAsAphabetMap();
+		this.filePath = Constants.FILEPATH;
+	}
+	
+	public Dictionary(String filePath) {
+		this.filePath = filePath;
 	}
 	
 	public String getFilePath() {
-		return filePath;
+		return this.filePath;
 	}
 	
 	public Map getSizeMap() {
+		if(this.sizeMap==null || this.sizeMap.isEmpty()) {
+			this.sizeMap = loadDictionaryAsWordSizeMap();
+		}
 		return this.sizeMap;
 	}
 	
 	public Map getAlphabetMap() {
+		if(this.alphabetMap==null || this.alphabetMap.isEmpty()) {
+			this.alphabetMap = loadDictionaryAsAphabetMap();
+		}
 		return this.alphabetMap;
 	}
-	
 
 	/**
 	 * load dictionary as a HashMap
@@ -46,7 +54,7 @@ public class Dictionary {
 	 * @param fileName
 	 * @return
 	 */
-	private void loadDictionaryAsWordSizeMap() {
+	public Map loadDictionaryAsWordSizeMap() {
 		Map returnMap = new HashMap<Integer, List>();
 		BufferedReader br = null;
 		String dictWord = null;
@@ -80,7 +88,7 @@ public class Dictionary {
 				System.out.println("Error: Error in closing the BufferedReader!");
 			}
 		}
-		this.sizeMap = returnMap;
+		return returnMap;
 	}
 	
 	/**
@@ -95,7 +103,7 @@ public class Dictionary {
 	 * @param fileName
 	 * @return
 	 */
-	private void loadDictionaryAsAphabetMap() {
+	public Map loadDictionaryAsAphabetMap() {
 		Map returnMap = new HashMap<Character, List>();
 		BufferedReader br = null;
 		String dictWord = null;
@@ -129,7 +137,7 @@ public class Dictionary {
 				System.out.println("Error: Error in closing the BufferedReader!");
 			}
 		}
-		this.alphabetMap = returnMap;
+		return returnMap;
 	}
 	
 }
