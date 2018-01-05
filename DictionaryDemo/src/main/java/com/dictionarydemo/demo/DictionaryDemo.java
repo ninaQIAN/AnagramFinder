@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import com.dictionarydemo.api.AnagramFinder;
 import com.dictionarydemo.api.Dictionary;
+import com.dictionarydemo.api.Search;
 import com.dictionarydemo.util.Constants;
 
 
@@ -31,6 +32,8 @@ public class DictionaryDemo {
 				anagranFinder.findAnagramWrapper(sizeMap);
 				break;
 			case "2":
+				Search search = new Search();
+				search.searchWordWrapper(sizeMap);
 				break;
 			case "3":
 				break;
