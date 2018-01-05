@@ -1,16 +1,20 @@
 package com.dictionarydemo.api;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 import com.dictionarydemo.util.Constants;
 
 public class Dictionary {
+	
+	private Integer dictionarySize = 0;
 	
 	private String filePath = null;
 	
@@ -18,29 +22,146 @@ public class Dictionary {
 	private Map alphabetMap = new HashMap<Character, List>();
 	
 	public Dictionary() {
-		this.filePath = Constants.FILEPATH;
+		filePath = Constants.FILEPATH;
+		initializeDictionary();
 	}
 	
 	public Dictionary(String filePath) {
 		this.filePath = filePath;
+		initializeDictionary();
 	}
 	
-	public String getFilePath() {
-		return this.filePath;
+	/**
+	 * method to initilaize dictionry
+	 * load sizeMap and alphabetMap
+	 */
+	private void initializeDictionary() {
+		sizeMap = loadDictionaryAsWordSizeMap();		
+		alphabetMap = loadDictionaryAsAphabetMap();
 	}
 	
-	public Map getSizeMap() {
-		if(this.sizeMap==null || this.sizeMap.isEmpty()) {
-			this.sizeMap = loadDictionaryAsWordSizeMap();
+	/**
+	 * method to reset variables in dictionary
+	 */
+	private void resetDictionary() {
+		filePath = null;
+		dictionarySize = 0;
+		sizeMap = new HashMap<Integer, List>();
+		alphabetMap = new HashMap<Character, List>();
+	}
+	
+	/**
+	 * Wrapper method to reset file path
+	 */
+	public void resetFilePathWrapper() {
+		System.out.println("Please enter a new path: ");
+		Scanner s = new Scanner(System.in);
+		String newFilePath = s.next().trim();
+		File f = new File(newFilePath);
+		if(!f.exists()|| !f.getName().endsWith(".txt")) {
+			System.out.println("ERROR: No .txt file found!\n");
 		}
-		return this.sizeMap;
+		else {
+			resetFilePath(newFilePath);
+		}
+	}
+	
+	/**
+	 * method to reset file path:
+	 * 1) clear current dictionary
+	 * 2) add new file path
+	 * 3) initialize
+	 * @param filePath
+	 */
+	private void resetFilePath(String filePath) {
+		resetDictionary();
+		this.filePath = filePath;
+		initializeDictionary();
+		System.out.println("Old dictionary file path is reset. New dictionary is loaded.");
+	}
+	
+	/**
+	 * method to get file path
+	 * @return
+	 */
+	public String getFilePath() {
+		System.out.println("File path: " + filePath);
+		return filePath;
+	}
+	
+	/**
+	 * method to get dictionary size
+	 * @return
+	 */
+	public Integer getDictionarySize() {
+		if(dictionarySize==0) {
+			BufferedReader br = null;
+			String dictWord = null;
+			try {
+				br = new BufferedReader(new FileReader(filePath));
+				while ((dictWord = br.readLine()) != null) {
+					dictionarySize++;
+				}
+			} catch(Exception e) {
+				System.out.println("ERROR: Something happened!");
+			} finally {
+				try {
+					if(br!=null)
+						br.close();
+				} catch (IOException ioe) {
+					System.out.println("Error: Error in closing the BufferedReader!");
+				}
+			}
+		}
+		System.out.println("Dictionary size: " + dictionarySize);
+		return dictionarySize;
+	}
+	
+	/**
+	 * method to get sizeMap
+	 * @return
+	 */
+	public Map getSizeMap() {
+		if(sizeMap==null || sizeMap.isEmpty()) {
+			sizeMap = loadDictionaryAsWordSizeMap();
+		}
+		return sizeMap;
 	}
 	
 	public Map getAlphabetMap() {
+		if(alphabetMap==null || alphabetMap.isEmpty()) {
+			alphabetMap = loadDictionaryAsAphabetMap();
+		}
+		return alphabetMap;
+	}
+	
+	/**
+	 * output counts of words in alphabetMap
+	 */
+	public void dumpAlphabetMap() {
 		if(this.alphabetMap==null || this.alphabetMap.isEmpty()) {
 			this.alphabetMap = loadDictionaryAsAphabetMap();
 		}
-		return this.alphabetMap;
+		System.out.println("In initial alphabet map:");
+		char key = 'a';
+		List dictList = new ArrayList<String>();
+		for(int i=0; i<26; i++) {
+			key = (char) ('a'+i);
+			dictList = (alphabetMap.containsKey(key))?(List) alphabetMap.get(key):new ArrayList<String>();
+			System.out.println(key + " has " + dictList.size() + " words");
+		}
+	}
+	
+	/**
+	 * output counts of words in sizeMap
+	 */
+	public void dumpSizeMap() {
+		System.out.println("In word size map:");
+		List dictList = new ArrayList<String>();
+		for(Object size:sizeMap.keySet()) {
+			dictList = (List) sizeMap.get(size);
+			System.out.println("word size " + size + " has " + dictList.size() + " words");
+		}
 	}
 
 	/**

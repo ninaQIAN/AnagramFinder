@@ -18,8 +18,8 @@ public class DictionaryDemo {
 	public static void main(String[] args) {
 		System.out.println("Welcome. This is a dictionary.");
 		Dictionary dictionary = new Dictionary();
-		Map alphaMap = dictionary.getAlphabetMap();
-		Map sizeMap = dictionary.getSizeMap();
+//		Map alphaMap = dictionary.getAlphabetMap();
+//		Map sizeMap = dictionary.getSizeMap();
 		System.out.println("Please take a look at the menu:");
 		boolean exit = false;
 		Scanner s = new Scanner(System.in);
@@ -29,13 +29,26 @@ public class DictionaryDemo {
 			switch(option) {
 			case "1":
 				AnagramFinder anagranFinder = new AnagramFinder();
-				anagranFinder.findAnagramWrapper(sizeMap);
+				anagranFinder.findAnagramWrapper(dictionary.getSizeMap());
 				break;
 			case "2":
 				Search search = new Search();
-				search.searchWordWrapper(sizeMap);
+				search.searchWordWrapper(dictionary.getSizeMap());
 				break;
 			case "3":
+				dictionary.dumpAlphabetMap();
+				break;
+			case "4":
+				dictionary.dumpSizeMap();
+				break;
+			case "5":
+				dictionary.getFilePath();
+				break;
+			case "6":
+				dictionary.getDictionarySize();
+				break;
+			case "7":
+				dictionary.resetFilePathWrapper();
 				break;
 			case "0":
 				s.close();

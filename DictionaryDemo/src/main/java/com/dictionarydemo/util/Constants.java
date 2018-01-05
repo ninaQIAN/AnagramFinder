@@ -10,7 +10,11 @@ public class Constants {
 			"\nMenu:\n"
 			+ "1. find anagrams of a word\n"
 			+ "2. search for a word by 3 letters\n"
-			+ "3. output dictionary by initial alphabet\n"
+			+ "3. output dictionary word count by initial alphabet\n"
+			+ "4. output dictionary word count by word size\n"
+			+ "5. check filePath\n"
+			+ "6. check dictionary size\n"
+			+ "7: reset dictionary file path\n"
 			+ "0. exit\n"
 			+ "Your option: ";
 

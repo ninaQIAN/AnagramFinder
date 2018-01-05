@@ -35,7 +35,7 @@ public class DictionaryTest {
 		assertTrue(outContent.toString().contains("Loading dictionary by word size"));
 		assertTrue(sizeMap!=null&&!sizeMap.isEmpty());
 		assertFalse(sizeMap.containsKey(0));
-		for(int i=1; i<=sizeMap.size(); i++) {
+		for(int i=1; i<=sizeMap.size(); i++) { // use default dictionary
 			assertTrue(sizeMap.containsKey(i));
 		}
 	}
