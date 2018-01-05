@@ -13,9 +13,9 @@ public class AnagramFinder {
 	
 	/**
 	 * Wrapper method to find a word's anagram
-	 * @param dictMap
+	 * @param sizeMap
 	 */
-	public void findAnagramWrapper(Map dictMap) {
+	public void findAnagramWrapper(Map sizeMap) {
 		String word = null;
 		Scanner s = new Scanner(System.in);
 		while(true) {
@@ -28,7 +28,7 @@ public class AnagramFinder {
 				break;
 			}
 			else {
-				findAnagram(word, dictMap);
+				findAnagram(word, sizeMap);
 			}
 		}	
 	}
@@ -36,16 +36,16 @@ public class AnagramFinder {
 	/**
 	 * method to output found anagrams of a word 
 	 * @param word
-	 * @param dictMap
+	 * @param sizeMap
 	 */
-	public void findAnagram(String word, Map dictMap) {
+	public void findAnagram(String word, Map sizeMap) {
 		List resultList = new ArrayList<String>();
 		if(!word.matches("[a-z]+")) { // word validation
 			System.out.println("ERROR: Input word should contain alphabets only!\n");
 		}
 		else {
 			// calculation
-			resultList = fetchAnagramFromDictionary(word, dictMap);
+			resultList = fetchAnagramFromDictionary(word, sizeMap);
 			// output result
 			if(resultList!=null && resultList.size()>0) { // has anagram
 				System.out.println(resultList.size() + " Anagrams found for " + word + ":\n"
@@ -60,13 +60,13 @@ public class AnagramFinder {
 	/**
 	 * wrapper method to find a word's anagram form dictionary hashMap
 	 * @param word
-	 * @param dictMap
+	 * @param sizeMap
 	 * @return
 	 */
-	public List fetchAnagramFromDictionary(String word, Map<Integer, List> dictMap) {
+	public List fetchAnagramFromDictionary(String word, Map<Integer, List> sizeMap) {
 		List returnList = new ArrayList<String>();
 		String dictWord = null;
-		List<String> dictList = (List) dictMap.get(word.length());
+		List<String> dictList = (List) sizeMap.get(word.length());
 		if(dictList!=null && !dictList.isEmpty()) {
 			for (int i=0; i<dictList.size(); i++) { // compare with every word from dictionary
 				dictWord = dictList.get(i);
