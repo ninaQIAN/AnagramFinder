@@ -1,4 +1,4 @@
-package com.dictionarydemo.api;
+package project.dictionarydemo.api;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import com.dictionarydemo.util.Constants;
+import project.dictionarydemo.util.Constants;
 
 public class Dictionary {
 	

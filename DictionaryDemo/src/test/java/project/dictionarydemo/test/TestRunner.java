@@ -1,10 +1,10 @@
-package com.dictionarydemo.test;
+package project.dictionarydemo.test;
 
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
-import com.dictionarydemo.testcase.AnagramFinderTest;
+import project.dictionarydemo.testcase.AnagramFinderTest;
 
 
 public class TestRunner {

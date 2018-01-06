@@ -1,4 +1,4 @@
-package com.dictionarydemo.testcase;
+package project.dictionarydemo.testcase;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -12,8 +12,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.dictionarydemo.api.Dictionary;
-import com.dictionarydemo.util.Constants;
+import project.dictionarydemo.api.Dictionary;
+import project.dictionarydemo.util.Constants;
 
 public class DictionaryTest {
 
@@ -68,7 +68,6 @@ public class DictionaryTest {
 		
 	}
 	
-
 	@Test
 	public void testResetFilePathWrapper() {
 		Dictionary dictionary = new Dictionary();
@@ -77,7 +76,7 @@ public class DictionaryTest {
 		System.setIn(in);
 		dictionary.resetFilePathWrapper();
 		assertTrue(outContent.toString().contains("ERROR: No .txt file found!\n"));
-		
+		// change file
 		in = new ByteArrayInputStream(files[1].getBytes());
 		System.setIn(in);
 		dictionary.resetFilePathWrapper();

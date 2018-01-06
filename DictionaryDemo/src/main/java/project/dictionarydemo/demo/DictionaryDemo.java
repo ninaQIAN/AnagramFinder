@@ -1,11 +1,11 @@
-package com.dictionarydemo.demo;
+package project.dictionarydemo.demo;
 
 import java.util.Scanner;
 
-import com.dictionarydemo.api.AnagramFinder;
-import com.dictionarydemo.api.Dictionary;
-import com.dictionarydemo.api.Search;
-import com.dictionarydemo.util.Constants;
+import project.dictionarydemo.api.AnagramFinder;
+import project.dictionarydemo.api.Dictionary;
+import project.dictionarydemo.api.Search;
+import project.dictionarydemo.util.Constants;
 
 
 public class DictionaryDemo {
