@@ -17,16 +17,16 @@ public class TestRunner {
 	public static void main(String[] args) {
 		Result result = JUnitCore.runClasses(AnagramFinderTest.class, DictionaryTest.class, SearchTest.class);
 		
-		log.info("TEST RESULT:\n" + result.getRunCount() + " test cases. " + result.getRunTime() + " ms\n");
+		log.info("\nTEST RESULT:\n" + result.getRunCount() + " test cases. " + result.getRunTime() + " ms\n");
 		for (Failure failure : result.getFailures()) {
 			log.info("ERROR: " + failure.toString());
 		}
 		if(result.wasSuccessful()) {
-			log.info("Successful.");
+			log.info("Successful!");
 			System.exit(0);
 		}
 		else {
-			log.info("Not successful.");
+			log.info("Not successful!");
 			System.exit(1);
 		}
 	}

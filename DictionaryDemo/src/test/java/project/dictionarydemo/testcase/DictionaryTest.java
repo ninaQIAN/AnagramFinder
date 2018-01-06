@@ -7,6 +7,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import org.junit.After;
 import org.junit.Before;
@@ -16,6 +17,8 @@ import project.dictionarydemo.api.Dictionary;
 import project.dictionarydemo.util.Constants;
 
 public class DictionaryTest {
+	
+	private static Logger log = Logger.getLogger(DictionaryTest.class.getName());
 
 	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
@@ -31,6 +34,8 @@ public class DictionaryTest {
 	
 	@Test
 	public void testGetSizeMap() {
+		log.info("testGetSizeMap...");
+		long t1 = System.currentTimeMillis();
 		Dictionary dictionary = new Dictionary();
 		Map sizeMap = dictionary.getSizeMap();
 		assertTrue(sizeMap!=null&&!sizeMap.isEmpty());
@@ -38,10 +43,14 @@ public class DictionaryTest {
 		for(int i=1; i<=sizeMap.size(); i++) { // use default dictionary
 			assertTrue(sizeMap.containsKey(i));
 		}
+		long t2 = System.currentTimeMillis();
+		log.info("done in " + (t2-t1) + "ms");
 	}
 
 	@Test
 	public void testGetAlphabetMap() {
+		log.info("testGetAlphabetMap...");
+		long t1 = System.currentTimeMillis();
 		Dictionary dictionary = new Dictionary();
 		Map alphabetMap = dictionary.getAlphabetMap();
 		assertTrue(alphabetMap!=null&&!alphabetMap.isEmpty());
@@ -50,26 +59,36 @@ public class DictionaryTest {
 			key = (char) ('a'+i);
 			assertTrue(alphabetMap.containsKey(key));			
 		}
+		long t2 = System.currentTimeMillis();
+		log.info("done in " + (t2-t1) + "ms");
 	}
 	
 	@Test
 	public void testGetDictionarySize() {
+		log.info("testGetDictionarySize...");
+		long t1 = System.currentTimeMillis();
 		Dictionary dictionary = new Dictionary();
 		dictionary.getDictionarySize();
 		assertTrue(outContent.toString().contains("Dictionary size: "));
-		
+		long t2 = System.currentTimeMillis();
+		log.info("done in " + (t2-t1) + "ms");
 	}
 	
 	@Test
 	public void testGetFilePath() {
+		log.info("testGetFilePath...");
+		long t1 = System.currentTimeMillis();
 		Dictionary dictionary = new Dictionary();
 		dictionary.getFilePath();
 		assertTrue(outContent.toString().contains(Constants.FILEPATH));
-		
+		long t2 = System.currentTimeMillis();
+		log.info("done in " + (t2-t1) + "ms");
 	}
 	
 	@Test
 	public void testResetFilePathWrapper() {
+		log.info("testResetFilePathWrapper...");
+		long t1 = System.currentTimeMillis();
 		Dictionary dictionary = new Dictionary();
 		String[] files = {"error", Constants.FILEPATH_TEST};
 		ByteArrayInputStream in = new ByteArrayInputStream(files[0].getBytes());
@@ -87,6 +106,8 @@ public class DictionaryTest {
 		Map alphabetMap = dictionary.getAlphabetMap();
 		assertTrue(alphabetMap!=null&&!alphabetMap.isEmpty());
 		assertTrue(alphabetMap.containsKey(new Character('i')));
+		long t2 = System.currentTimeMillis();
+		log.info("done in " + (t2-t1) + "ms");
 	}
 	
 }

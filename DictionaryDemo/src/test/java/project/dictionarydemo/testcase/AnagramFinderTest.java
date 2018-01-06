@@ -8,6 +8,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import org.junit.After;
 import org.junit.Before;
@@ -17,6 +18,8 @@ import project.dictionarydemo.api.AnagramFinder;
 import project.dictionarydemo.api.Dictionary;
 
 public class AnagramFinderTest {
+	
+	private static Logger log = Logger.getLogger(AnagramFinderTest.class.getName());
 	
 	private AnagramFinder anagramFinder = new AnagramFinder();
 	
@@ -34,6 +37,8 @@ public class AnagramFinderTest {
 	
 	@Test
 	public void testIsAnagram() {
+		log.info("testIsAnagram...");
+		long t1 = System.currentTimeMillis();
 		// 2 words have already been cleaned up
 		boolean isAnagram = anagramFinder.isAnagram("stop", "spot");
 		assertTrue(isAnagram);
@@ -41,10 +46,14 @@ public class AnagramFinderTest {
 		assertTrue(isAnagram);
 		isAnagram = anagramFinder.isAnagram("saop", "spot");
 		assertFalse(isAnagram);
+		long t2 = System.currentTimeMillis();
+		log.info("done in " + (t2-t1) + "ms");
 	}
 	
 	@Test
 	public void testFetchAnagramFromDictionary() {
+		log.info("testFetchAnagramFromDictionary...");
+		long t1 = System.currentTimeMillis();
 		Dictionary dictionary = new Dictionary();
 		Map sizeMap = dictionary.getSizeMap();
 		assertTrue(sizeMap!=null);
@@ -58,10 +67,14 @@ public class AnagramFinderTest {
 			assertTrue(resultList.contains(expectWords[i]));
 			assertFalse(resultList.contains(expectWords[testWords.length-i-1]));
 		}
+		long t2 = System.currentTimeMillis();
+		log.info("done in " + (t2-t1) + "ms");
 	}
 	
 	@Test
 	public void testFindAnagram() {
+		log.info("testFindAnagram...");
+		long t1 = System.currentTimeMillis();
 		Dictionary dictionary = new Dictionary();
 		Map sizeMap = dictionary.getSizeMap();
 		assertTrue(sizeMap!=null);
@@ -84,6 +97,8 @@ public class AnagramFinderTest {
 		String noWord = "pl";
 		anagramFinder.findAnagram(noWord, sizeMap);
 		assertTrue(outContent.toString().contains("No anagrams found for " + noWord));
+		long t2 = System.currentTimeMillis();
+		log.info("done in " + (t2-t1) + "ms");
 	}
 	
 

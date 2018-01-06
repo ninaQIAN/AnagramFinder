@@ -8,6 +8,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import org.junit.After;
 import org.junit.Before;
@@ -17,6 +18,8 @@ import project.dictionarydemo.api.Dictionary;
 import project.dictionarydemo.api.Search;
 
 public class SearchTest {
+	
+	private static Logger log = Logger.getLogger(SearchTest.class.getName());
 	
 	private Search search = new Search();
 	
@@ -34,6 +37,8 @@ public class SearchTest {
 
 	@Test
 	public void testFindWordByString() {
+		log.info("testFindWordByString...");
+		long t1 = System.currentTimeMillis();
 		Dictionary dictionary = new Dictionary();
 		Map sizeMap = dictionary.getSizeMap();
 		assertTrue(sizeMap!=null);
@@ -47,10 +52,14 @@ public class SearchTest {
 			assertTrue(resultList.contains(expectWords[i]));
 			assertFalse(resultList.contains(expectWords[searchArr.length-i-1]));
 		}
+		long t2 = System.currentTimeMillis();
+		log.info("done in " + (t2-t1) + "ms");
 	}
 	
 	@Test
 	public void testSearchWord() {
+		log.info("testSearchWord...");
+		long t1 = System.currentTimeMillis();
 		Dictionary dictionary = new Dictionary();
 		Map sizeMap = dictionary.getSizeMap();
 		assertTrue(sizeMap!=null);
@@ -78,6 +87,8 @@ public class SearchTest {
 		String noWord = "adfb";
 		search.searchWord(noWord, sizeMap);
 		assertTrue(outContent.toString().contains("No result found for searchTerm: " + noWord));
+		long t2 = System.currentTimeMillis();
+		log.info("done in " + (t2-t1) + "ms");
 	}
 
 }
