@@ -1,4 +1,4 @@
-package com.dictionarydemo.api;
+package project.dictionarydemo.api;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import com.dictionarydemo.util.Constants;
+import project.dictionarydemo.util.Constants;
 
 public class Dictionary {
 	
@@ -96,10 +96,9 @@ public class Dictionary {
 	public Integer getDictionarySize() {
 		if(dictionarySize==0) {
 			BufferedReader br = null;
-			String dictWord = null;
 			try {
 				br = new BufferedReader(new FileReader(filePath));
-				while ((dictWord = br.readLine()) != null) {
+				while ((br.readLine()) != null) {
 					dictionarySize++;
 				}
 			} catch(Exception e) {
@@ -122,16 +121,10 @@ public class Dictionary {
 	 * @return
 	 */
 	public Map getSizeMap() {
-		if(sizeMap==null || sizeMap.isEmpty()) {
-			sizeMap = loadDictionaryAsWordSizeMap();
-		}
 		return sizeMap;
 	}
 	
 	public Map getAlphabetMap() {
-		if(alphabetMap==null || alphabetMap.isEmpty()) {
-			alphabetMap = loadDictionaryAsAphabetMap();
-		}
 		return alphabetMap;
 	}
 	
@@ -139,9 +132,6 @@ public class Dictionary {
 	 * output counts of words in alphabetMap
 	 */
 	public void dumpAlphabetMap() {
-		if(this.alphabetMap==null || this.alphabetMap.isEmpty()) {
-			this.alphabetMap = loadDictionaryAsAphabetMap();
-		}
 		System.out.println("In initial alphabet map:");
 		char key = 'a';
 		List dictList = new ArrayList<String>();

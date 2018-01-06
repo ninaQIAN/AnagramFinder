@@ -1,4 +1,4 @@
-package com.dictionarydemo.api;
+package project.dictionarydemo.api;
 
 import java.util.ArrayList;
 import java.util.List;
