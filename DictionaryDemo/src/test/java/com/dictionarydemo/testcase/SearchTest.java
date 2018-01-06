@@ -1,8 +1,7 @@
-package com.dictionarydemo.test;
+package com.dictionarydemo.testcase;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -21,8 +20,6 @@ public class SearchTest {
 	
 	private Search search = new Search();
 	
-	private Dictionary dictionary = new Dictionary();
-	
 	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
 	@Before
@@ -37,6 +34,7 @@ public class SearchTest {
 
 	@Test
 	public void testFindWordByString() {
+		Dictionary dictionary = new Dictionary();
 		Map sizeMap = dictionary.getSizeMap();
 		assertTrue(sizeMap!=null);
 		assertTrue(!sizeMap.isEmpty());
@@ -53,6 +51,7 @@ public class SearchTest {
 	
 	@Test
 	public void testSearchWord() {
+		Dictionary dictionary = new Dictionary();
 		Map sizeMap = dictionary.getSizeMap();
 		assertTrue(sizeMap!=null);
 		assertTrue(!sizeMap.isEmpty());

@@ -3,7 +3,10 @@ package com.dictionarydemo.util;
 public class Constants {
 	
 	// dictionary file path
-	public static final String FILEPATH = "./src/main/resources/dictionary.txt";
+	public static final String FILEPATH = "./src/resources/dictionary.txt";
+	
+	// dictionary file path
+	public static final String FILEPATH_TEST = "./src/resources/newDict.txt";
 	
 	// available options in menu
 	public static final String MENU = 

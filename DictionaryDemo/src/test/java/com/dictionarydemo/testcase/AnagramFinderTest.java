@@ -1,4 +1,4 @@
-package com.dictionarydemo.test;
+package com.dictionarydemo.testcase;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -19,8 +19,6 @@ import com.dictionarydemo.api.Dictionary;
 public class AnagramFinderTest {
 	
 	private AnagramFinder anagramFinder = new AnagramFinder();
-	
-	private Dictionary dictionary = new Dictionary();
 	
 	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
@@ -47,6 +45,7 @@ public class AnagramFinderTest {
 	
 	@Test
 	public void testFetchAnagramFromDictionary() {
+		Dictionary dictionary = new Dictionary();
 		Map sizeMap = dictionary.getSizeMap();
 		assertTrue(sizeMap!=null);
 		assertTrue(!sizeMap.isEmpty());
@@ -63,6 +62,7 @@ public class AnagramFinderTest {
 	
 	@Test
 	public void testFindAnagram() {
+		Dictionary dictionary = new Dictionary();
 		Map sizeMap = dictionary.getSizeMap();
 		assertTrue(sizeMap!=null);
 		assertTrue(!sizeMap.isEmpty());
