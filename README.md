@@ -3,6 +3,7 @@ yqian - 2018/1/5
 
 Task 1. AnagramFinder (folder)
 small test to find a word's anagram from a given dictionary
+
     1). Files
         AnagramFinderBasic.java (basic version)
         AnagramFinderAdvanced.java (enhanced)
@@ -22,6 +23,7 @@ small test to find a word's anagram from a given dictionary
 
 Task 2. DictionaryDemo (Java Project)
 dictionary with a option menu
+
     1) Feature:
         a. find a word's anagrams from dictionary and output result in a list
         b. search a word by at least 3 letters from dictionary and output result a list
